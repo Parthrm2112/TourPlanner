@@ -1,0 +1,23 @@
+<script>
+    document.getElementById("loginForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        const res = await fetch("/login", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+
+        if (data.redirect) {
+            // ✅ If backend sends redirect URL, go there
+            window.location.href = data.redirect;
+        } else {
+            // ❌ Otherwise, just show error or message
+            document.getElementById("loginMessage").innerText = data.message || data.error;
+        }
+    });
+</script>
