@@ -6,3 +6,6 @@ __pycache__/
 instance/
 .env
 tourism.db
+
+
+pip install -r requirements.txt
